@@ -4,11 +4,11 @@ Paper: https://www.sciencedirect.com/science/article/pii/S0925231226011793
 ***
 
 Summary:
-- LiteUAV_Det-n: 5.96M
-- LiteUAV_Det-s: 22.53M
-- LiteUAV_Det-m: 42.81M
-- LiteUAV_Det-l: 62.63M
-- LiteUAV_Det-x: 97.8M
+- LiteUAV_Det-n: 3.41M
+- LiteUAV_Det-s: 12.71M
+- LiteUAV_Det-m: 23.96M
+- LiteUAV_Det-l: 34.96M
+- LiteUAV_Det-x: 54.60M
 
 ***
 
@@ -24,7 +24,7 @@ Some discrepancies in the LiteUAV-Det paper:
 --> I set (k,s,p)=(3,1,1), following the original paper of PConv.
 
 - EPPF module's Maxpool2d kernel size is not clearly given in section 3.4. It says the first kernel size equals 1, which makes Maxpool2d an Identity operation, which is very unlikely. 
---> Since EPPF is an alternative to YOLOv5's SPPF, I choose 3 kernel size of Maxpool2d to be (5,5). Besides, I also introduce a hidden dimension to reduce computation just like Ultralytics SPPF implementation.
+--> Since EPPF is an alternative to YOLOv5's SPPF, I choose 3 kernel size of Maxpool2d to be (5,5).
 
 ***
 
@@ -33,13 +33,13 @@ Since I couldn't get 6.38M params like in the paper due to some unclarity, I mad
 
 - Issue 1: The 2 3x3 Conv layers in the DSSF module introduce too many params
 --> I use a hidden dimension c_ in DSSF.
---> Results: LiteUAV_Det-n from 19M to 10M
+--> Results: LiteUAV_Det-n from 10.34M to 5.69M
 
 - Issue 2: The 2 3x3 Conv layers in the EPPF module introduce too many params
 --> I use a hidden dimension c_ in EPPF, just like Ultralytics' SPPF.
---> Results: LiteUAV_Det-n from 19M to 15M
+--> Results: LiteUAV_Det-n from 10.34M to 8.06M
 
-- Combining these 2 changes, LiteUAV_Det-n from 19M to 6M.
+- Combining these 2 changes, LiteUAV_Det-n from 10.34M to 3.41M.
 
 ***
 
